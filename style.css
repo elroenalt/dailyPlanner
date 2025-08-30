@@ -11,7 +11,7 @@
     --background-color: #1f2937;
     --text-color: #f3f4f6;
     --interface-bg-color: #374151;
-    --button-bg-color: #6366f1;
+    --button-bg-color: #475975;
     --button-text-color: #e5e7eb;
     --button-hover-bg-color: #4f46e5;
     --border-color: #4b5563;
@@ -25,18 +25,32 @@
     --button-hover-bg-color: #be185d;
     --border-color: #fbcfe8;
 }
+#closeTinyScreen {
+    user-select: none;
+    cursor: pointer;
+    position: absolute;
+    font-size: 5rem;
+    right: -1.5rem;
+    top: -2.5rem;
+    transition: transform 0.3s ease-in-out;
+}
+#closeTinyScreen:hover {
+    transform: scale(1.2);
+}
 #title {
     border-radius: 1rem;
     width: 35rem;
     height: 6rem;
     background-color: var(--interface-bg-color);
+    color: var(--text-color);
     position: absolute;
     text-align: center;
     padding: 1rem;
     left: 50%;
     top: 2rem;
     transform: translate(-50%,0rem);
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    font-size: 5rem;
     transition: background-color 0.3s ease;
 }
 body {
@@ -45,8 +59,87 @@ body {
     display: flex;
     align-items: center;
     min-height: 100vh;
-    font-size: 5rem;
     background-color: var(--background-color);
     color: var(--text-color);
     transition: background-color 0.3s ease, color 0.3s ease;
+}
+#Overlay {
+    background-color: #afcadb10;
+    pointer-events: none;
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+}
+#settingsButton {
+    user-select: none;
+    display: inline-block;
+    pointer-events: auto;
+    font-size: 2.5rem;
+    position: absolute;
+    right: 0rem;
+    bottom: 0rem;
+    cursor: pointer;
+}
+#openThemeSelection {
+    user-select: none;
+    cursor: pointer;
+}
+#selectThemeContainer {
+    display: none;
+}
+.selectTheme {
+    font-size: 4.5rem;
+    padding: 0.5rem;
+    user-select: none;
+    border-radius: 2rem;
+    background-color: var(--button-bg-color);
+    color: var(--text-color);
+    transition: transform 0.3s ease-in-out;
+    cursor: pointer;
+    transition: background-color 0.5s ease;
+}
+.selectTheme:hover {
+    background-color: var(--button-hover-bg-color);
+}
+#selectThemeContainer {
+    display: auto;
+}
+#AppSettings {
+    width: 100%;
+    height: 100%;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+#displayScreenTiny {
+    display: none;
+    pointer-events: auto;
+    font-size: 5rem;
+    width: 50rem;
+    height: 50rem;
+    position: absolute;
+    left: 50%;
+    top: 54%;
+    text-align: center;
+    transform: translate(-50%,-50%);
+    background-color: var(--interface-bg-color);
+    color: var(--text-color);
+    border-radius: 1rem;
+    transition: background-color 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.8);
+}
+::-webkit-scrollbar {
+width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: var(--interface-bg-color);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--background-color);
+  border-radius: 5px;
+  background-clip: content-box;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #333333;
 }

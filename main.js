@@ -1,4 +1,5 @@
 
+
 function loadData() {
     const userStyle = localStorage.getItem('userStyle');
     if(userStyle) {
@@ -24,4 +25,16 @@ function changeUserStyle(style = 0) {
     }
     localStorage.setItem('userStyle', style);
 }
+function toggleDisplay(id,dir) {
+    const element = document.querySelector('#' + id)
+    const display = element.style.display
+    if(display == 'none') {element.style.display = 'block'}
+    else {element.style.display = 'none'}
+}
 window.addEventListener('load', loadData);
+document.querySelector('#settingsButton').addEventListener('click',() => toggleDisplay('displayScreenTiny')) 
+document.querySelector('#closeTinyScreen').addEventListener('click',() => toggleDisplay('displayScreenTiny'))
+document.querySelector('#openThemeSelection').addEventListener('click', () => toggleDisplay('selectThemeContainer'))
+document.querySelector('#darkTheme').addEventListener('click', () => changeUserStyle(0))
+document.querySelector('#colorfullTheme').addEventListener('click', () => changeUserStyle(1))
+document.querySelector('#lightTheme').addEventListener('click', () => changeUserStyle(2))
