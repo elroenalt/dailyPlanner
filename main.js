@@ -5,7 +5,6 @@ function loadData() {
     if(userStyle) {
         changeUserStyle(parseInt(userStyle))
     }else {
-        localStorage.setItem('userStyle', 0);
         changeUserStyle(0)
     }
 }
@@ -35,6 +34,10 @@ window.addEventListener('load', loadData);
 document.querySelector('#settingsButton').addEventListener('click',() => toggleDisplay('displayScreenTiny')) 
 document.querySelector('#closeTinyScreen').addEventListener('click',() => toggleDisplay('displayScreenTiny'))
 document.querySelector('#openThemeSelection').addEventListener('click', () => toggleDisplay('selectThemeContainer'))
+
+document.querySelector('#openWorkMaterials').addEventListener('click', () => toggleDisplay('displayScreenBig'))
+document.querySelector('#closeBigScreen').addEventListener('click', () => toggleDisplay('displayScreenBig'))
+
 document.querySelector('#darkTheme').addEventListener('click', () => changeUserStyle(0))
 document.querySelector('#colorfullTheme').addEventListener('click', () => changeUserStyle(1))
 document.querySelector('#lightTheme').addEventListener('click', () => changeUserStyle(2))

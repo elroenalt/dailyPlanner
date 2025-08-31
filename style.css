@@ -143,3 +143,61 @@ width: 10px;
 ::-webkit-scrollbar-thumb:hover {
   background: #333333;
 }
+#displayScreenBig {
+    display: none;
+    pointer-events: auto;
+    font-size: 5rem;
+    width: 50rem;
+    height: 90%;
+    position: absolute;
+    left: 50%;
+    top: 48%;
+    text-align: center;
+    transform: translate(-50%,-50%);
+    background-color: var(--interface-bg-color);
+    color: var(--text-color);
+    border-radius: 1rem;
+    transition: background-color 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.8);
+}
+#closeBigScreen {
+    user-select: none;
+    cursor: pointer;
+    position: absolute;
+    font-size: 4rem;
+    right: -1.2rem;
+    top: -2.2rem;
+    transition: transform 0.3s ease-in-out;
+}
+#closeBigScreen:hover {
+    transform: scale(1.2);
+}
+#openWorkMaterials {
+    cursor: pointer;
+}
+#workMaterial {
+    display: block;
+    pointer-events: auto;
+    font-size: 5rem;
+    width: 50rem;
+    padding: 1rem;
+    position: absolute;
+    left: 50%;
+    top: 15rem;
+    text-align: center;
+    transform: translate(-50%,0rem);
+    background-color: var(--interface-bg-color);
+    color: var(--text-color);
+    border-radius: 1rem;
+    transition: background-color 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.8);
+}
+@media only screen and (max-width: 600px) {
+    #displayScreenBig {
+        width: 90vw;
+    }
+}
+#workMaterialScreen {
+    height: 100%;
+    width: 100%
+}
