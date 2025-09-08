@@ -105,6 +105,7 @@ body {
     display: auto;
 }
 #AppSettings {
+    display: none;
     width: 100%;
     height: 100%;
     overflow-x: hidden;
@@ -200,4 +201,63 @@ width: 10px;
 #workMaterialScreen {
     height: 100%;
     width: 100%
+}
+.materialDisplay {
+    cursor: pointer;
+    margin: 1rem auto; 
+    border-radius: 2rem;
+    width: 50%;
+    background-color: var(--background-color);
+}
+#workMaterialDisplay {
+    display: none;
+    width: 100%;
+    height: 100%;
+}
+#backWorkMaterial {
+    cursor: pointer;
+    position: fixed;
+    left: 1rem;
+    top: 0rem;
+}
+.lineMaterial {
+    width: 100%;
+    display: block; 
+    margin: 1rem auto;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+#createNewWorkMaterial {
+    cursor: pointer;
+    position: fixed;
+    bottom: -0.5rem;
+    right: 0rem;
+    transform: translate(0rem,1rem);
+    transition: transform 0.3s ease-in-out;
+}
+#createNewWorkMaterial:hover {
+    transform: scale(1.1);
+}
+input[type="text"] {
+    font-size: 3rem;
+    background-color: var(--background-color);
+    border: 1px solid var(--text-color);
+    color: var(--text-color);
+    padding: 8px;
+    font-family: sans-serif;
+}
+#titleWorkMaterial {
+    border-radius: 2rem;
+    display: block;
+    min-width: 50%;
+    max-width: 60%;
+    background-color: var(--background-color);
+    margin: 1rem auto; 
+    position: fixed;
+    left: 50%;
+    transform: translate(-50%,0rem);
+}
+.workMaterialContainer {
+    position: relative;
+    top:  9rem;
 }
