@@ -261,3 +261,6 @@ input[type="text"] {
     position: relative;
     top:  9rem;
 }
+.createMaterialScreen {
+    display: none;
+}

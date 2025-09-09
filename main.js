@@ -106,17 +106,24 @@ function changeUserStyle(style = 0) {
     }
     localStorage.setItem('userStyle', style);
 }
-function toggleDisplay(id) {
-    const element = document.querySelector('#' + id)
+function toggleDisplay(id,className) {
+    let element
+    if(className) {
+        element = document.querySelector('#' + className)
+    }else {
+        element = document.querySelector('#' + id)
+    }
     const display = element.style.display
     if(display == 'block') {element.style.display = 'none'}
     else {element.style.display = 'block'}
 }
 document.addEventListener('DOMContentLoaded', () => {
-    let curBigScreen = 'AppSettings'
-    let curTinyScreen = 'AppSettings'
+    let curBigScreen = 'spaceholder'
+    let curTinyScreen = 'spaceholder'
     changeUserStyle(parseInt(loadData('userStyle', 0)));
     material = new Material();
+    toggleDisplay('createMaterialScreen');
+    toggleDisplay('createMaterialScreen');
     
     document.querySelector('#settingsButton').addEventListener('click', () => {
         toggleDisplay(curTinyScreen)
