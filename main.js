@@ -1,4 +1,93 @@
 let material;
+let question;
+let languages = [];
+let jsonFiles = [
+  'jsonFiles/OldNorse.json',
+  'jsonFiles/French.json',
+]
+async function fetchJsonFiles() {
+    try {
+        for(let file of jsonFiles) {
+        const response = await fetch(file)
+        if(!response.ok) {
+          throw new Error('Error! while laoding '+ file + ' status: ' + responseNorse.status)
+        }
+        const data = await response.json()
+        let words = [];
+          for(let segment of data.segments) {
+              for(let word of segment.words) {
+              words.push(word);
+            }
+          }
+        data.words = words;
+        languages.push(data)
+      }
+    }catch (error) {
+        console.error("Error while starting:", error);
+    } 
+}
+class Questions {
+    constructor() {
+        this.questions = []
+        this.length;
+        this.progress;
+        this.name;
+        this.question = 0;
+        
+    }
+    initQuestionSet() {
+        this.question = 0;
+        this.questions = []
+        this.generateNewQuestionSet(language)
+    }
+    generateNewQuestionSet(language) {
+        const uniqueWordIndices = new Set();
+        const totalWords = language.words.length;
+    
+        while (uniqueWordIndices.size < amount) {
+            const randomIndex = getRndInt(0, totalWords);
+            uniqueWordIndices.add(randomIndex);
+        }
+    
+        const wordIndices = Array.from(uniqueWordIndices);
+
+        for(let i = 0; i < amount; i++) {
+            const wordIndex = wordIndices[i];
+            const question = this.generateQuestion(language,wordIndex,dirType);
+            this.questions.push(question);
+        }
+    }
+    generateQuestion(language,wordIndex,dirType) {
+        const words = language.words
+        const question = {}
+        console.log(dirType)
+        switch(dirType) {
+            case 0: 
+                question.dir = true
+                console.log('a')
+            break;
+            case 1:
+                question.dir = false
+                console.log('b')
+            break;
+            case 2:
+                question.dir = getRndInt(0,1) > 0 ? true : false
+                console.log('c')
+            break;
+        }
+        const used = new Set([wordIndex])
+        const wordPos = getRndInt(0,3)
+        let options = []
+        for(let i = 0; i < 3; i++) {
+            const index = getRndIntExcept(used,language.words.length)
+            used.add(index)
+            options.push(i == wordPos ? words[wordIndex] : words[index])
+        }
+        question.corIndex = wordPos
+        question.options = options
+        return question
+    }
+}
 class Material {
     constructor() {
         this.curMaterial
@@ -155,6 +244,12 @@ document.addEventListener('DOMContentLoaded', () => {
     })
     document.querySelector('#createMaterial').addEventListener('click', () => {
         material.createMaterial()
+    })
+    document.querySelector('#openLearner').addEventListener('click', () => {
+        toggleDisplay(curBigScreen)
+        curBigScreen = 'workMaterialScreen'
+        toggleDisplay('questionContainer')
+        toggleDisplay('displayScreenBig');
     })
 
     document.querySelector('#darkTheme').addEventListener('click', () => changeUserStyle(0));

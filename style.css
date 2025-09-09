@@ -199,6 +199,7 @@ width: 10px;
     }
 }
 #workMaterialScreen {
+    display: none;
     height: 100%;
     width: 100%
 }
@@ -262,5 +263,54 @@ input[type="text"] {
     top:  9rem;
 }
 .createMaterialScreen {
+    display: none;
+}
+#languageLearner {
+    display: block;
+    pointer-events: auto;
+    font-size: 5rem;
+    width: 50rem;
+    padding: 1rem;
+    position: absolute;
+    left: 50%;
+    top: 25rem;
+    text-align: center;
+    transform: translate(-50%,0rem);
+    background-color: var(--interface-bg-color);
+    color: var(--text-color);
+    border-radius: 1rem;
+    transition: background-color 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.8);
+}
+#questionContainer input[type="radio"] {
+  appearance: none;
+  -webkit-appearance: none;
+  position: absolute;
+  opacity: 0;
+}
+#questionContainer label {
+    display: inline-block;
+    padding: 10px 20px;
+    border-radius: 1rem;
+    cursor: pointer;
+    background-color: var(--background-color);
+    margin: 5px;
+}
+#questionContainer input[type="radio"]:hover + label {
+    background-color: var(--button-hover-bg-color);
+}
+
+#questionContainer input[type="radio"]:checked + label {
+    background-color: var(--button-hover-bg-color);
+}
+
+#questionContainer input[type="radio"]:checked:hover + label {
+    background-color: var(--button-hover-bg-color);
+}
+#questionContainer .red,#questionContainer .red:hover{
+  background-color: red;
+    
+}
+#questionContainer {
     display: none;
 }
