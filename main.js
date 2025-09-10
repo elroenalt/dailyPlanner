@@ -25,54 +25,73 @@ async function fetchJsonFiles() {
     }catch (error) {
         console.error("Error while starting:", error);
     } 
+    console.log(languages)
 }
-class Questions {
+class Question {
     constructor() {
         this.questions = []
-        this.length;
+        this.amount = 5
+        this.dirType = 0
         this.progress;
         this.name;
-        this.question = 0;
+        this.question = -1;
         
     }
-    initQuestionSet() {
-        this.question = 0;
+    displayNextQuestion() {
+        this.question++
+        console.log(this.questions[this.question])
+        const question = this.questions[this.question]
+        const dir = question.dir
+        const options = question.options
+
+        const instHTML = document.querySelector('#questionInstructions')
+        for(let i = 0; i < options.length; i++) {
+            const option = options[i]
+            const label = document.querySelector('#label-option-' + i);
+            const word = dir ? option.word : option.translated
+            if(i = question.corIndex) {
+                const instWord = dir ? option.translated : option.word
+                instHTML.textContent = instWord
+            }
+            label.textContent = word
+        }
+    }
+    initQuestionSet(language) {
+        this.question = -1;
         this.questions = []
         this.generateNewQuestionSet(language)
+        this.displayNextQuestion()
     }
     generateNewQuestionSet(language) {
         const uniqueWordIndices = new Set();
         const totalWords = language.words.length;
     
-        while (uniqueWordIndices.size < amount) {
+        while (uniqueWordIndices.size < this.amount) {
             const randomIndex = getRndInt(0, totalWords);
             uniqueWordIndices.add(randomIndex);
         }
     
         const wordIndices = Array.from(uniqueWordIndices);
 
-        for(let i = 0; i < amount; i++) {
+        for(let i = 0; i < this.amount; i++) {
             const wordIndex = wordIndices[i];
-            const question = this.generateQuestion(language,wordIndex,dirType);
+            const question = this.generateQuestion(language,wordIndex);
             this.questions.push(question);
         }
     }
-    generateQuestion(language,wordIndex,dirType) {
+    generateQuestion(language,wordIndex) {
         const words = language.words
         const question = {}
-        console.log(dirType)
-        switch(dirType) {
+        console.log(this.dirType)
+        switch(this.dirType) {
             case 0: 
                 question.dir = true
-                console.log('a')
             break;
             case 1:
                 question.dir = false
-                console.log('b')
             break;
             case 2:
-                question.dir = getRndInt(0,1) > 0 ? true : false
-                console.log('c')
+                question.dir = getRndInt(0,1) > 0 ? false : true
             break;
         }
         const used = new Set([wordIndex])
@@ -85,9 +104,20 @@ class Questions {
         }
         question.corIndex = wordPos
         question.options = options
-        return question
+        return question;
     }
 }
+function getRndIntExcept(except,max) {
+    while (true) {
+        const int = getRndInt(0,max);
+        if(!except.has(int)) {
+            return int;
+        }
+    }
+}
+function getRndInt(min,max) {
+    return Math.floor(Math.random() * (max - min)) + min;
+} 
 class Material {
     constructor() {
         this.curMaterial
@@ -207,9 +237,12 @@ function toggleDisplay(id,className) {
     else {element.style.display = 'block'}
 }
 document.addEventListener('DOMContentLoaded', () => {
+    fetchJsonFiles()
     let curBigScreen = 'spaceholder'
     let curTinyScreen = 'spaceholder'
     changeUserStyle(parseInt(loadData('userStyle', 0)));
+    
+    question = new Question()
     material = new Material();
     toggleDisplay('createMaterialScreen');
     toggleDisplay('createMaterialScreen');
@@ -249,6 +282,7 @@ document.addEventListener('DOMContentLoaded', () => {
         toggleDisplay(curBigScreen)
         curBigScreen = 'workMaterialScreen'
         toggleDisplay('questionContainer')
+        question.initQuestionSet(languages[0])
         toggleDisplay('displayScreenBig');
     })
 
